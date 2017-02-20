@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lightningrobotics.scout_862.EndActivity">
+
+    <CheckBox
+        android:text="Climb Rope"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/cb_end_climb" />
+
+    <CheckBox
+        android:text="Stuck on Fuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb_end_stuck"
+        android:layout_below="@+id/cb_end_climb"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:text="Can collect Fuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/cb_end_collectFuel" />
+
+    <CheckBox
+        android:text="Defence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb_end_def"
+        android:layout_below="@+id/cb_end_collectFuel"
+        android:layout_alignLeft="@+id/cb_end_collectFuel"
+        android:layout_alignStart="@+id/cb_end_collectFuel" />
+
+    <TextView
+        android:text="Other Comments:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cb_end_stuck"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="62dp"
+        android:id="@+id/tv_end_otherComments"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="20sp"
+        android:textStyle="normal|bold"
+        android:background="#AAAA0000" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/tv_end_otherComments"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/et_otherCpmments"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textAlignment="viewStart"
+        android:textStyle="normal|italic"
+        android:hint="Cool LEDS, Magic Smoke, Intentional Flipping, etc" />
+</RelativeLayout>

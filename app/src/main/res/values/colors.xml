@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default Google Colors-->
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="black_overlay">#66000000</color>
+    <!-- FIRST Standard Colors -->
+    <color name="colorFirstRed">#ed1c24</color>
+    <color name="colorFirstBlue">#0066b3</color>
+    <color name="colorFirstBlack">#231f20</color>
+    <color name="colorFirstGrey">#9a989a</color>
+    <!-- FIRST Complementry Colors -->
+    <color name="colorFirstCCone">#cfe5ae</color>
+    <color name="colorFirstCCtwo">#eebeab</color>
+    <color name="colorFirstCCthree">#ffdc90</color>
+    <color name="colorFirstCCfour">#d6eef0</color>
+    <color name="colorFirstCCfive">#cadb2a</color>
+    <color name="colorFirstCCsix">#8f0507</color>
+    <color name="colorFirstCCseven">#e6b122</color>
+    <color name="colorFirstCCeight">#003974</color>
+
+</resources>
