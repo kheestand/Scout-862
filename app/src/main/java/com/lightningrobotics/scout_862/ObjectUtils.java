@@ -16,6 +16,16 @@ public class ObjectUtils
 {
     public static CheckBox readCheckBox(CheckBox cb, int xValue)
     {
+        System.out.println("readCheckBoxIn: " + cb);
+        if(cb == null)
+        {
+            /**
+             * In some cases, we do not care if a checkbox returns a null.
+             * A checkbox returning a null is most likely because the fragment
+             * it is a part of has not yet been created.
+             */
+            System.out.println("null");
+        }
         if(appData[xValue][matchCounter].equals("1"))
             cb.setChecked(true);
         else
@@ -34,6 +44,10 @@ public class ObjectUtils
 
     public static RadioButton readRadioButton(RadioButton rb)
     {
+        if(rb == null)
+        {
+            System.out.println("null");
+        }
         String idAsString = rb.getResources().getResourceName(rb.getId());
         String[] splitIDdAsString = idAsString.split("_");
         int cbNum = Integer.parseInt(splitIDdAsString[3]);
@@ -49,7 +63,7 @@ public class ObjectUtils
     }
 
     public static void writeRadioButton(RadioButton rb)
-    {//Value read is wrong. There is a problem with reading the 0th checkbox;
+    {
         String idAsString = rb.getResources().getResourceName(rb.getId());
         String[] splitIDdAsString = idAsString.split("_");
         int cbNum = Integer.parseInt(splitIDdAsString[3]);

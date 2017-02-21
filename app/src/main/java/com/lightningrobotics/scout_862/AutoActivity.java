@@ -37,6 +37,7 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        System.out.println("onCreateView: Auto");
         autoView = inflater.inflate(R.layout.fragment_auto, container, false);
         // Inflate the layout for this fragment
         //Set both autoView to view
@@ -53,6 +54,7 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
         autoLowBool.setOnClickListener(this);
         autoHighBool.setOnClickListener(this);
         autoGearBool.setOnClickListener(this);
+
         return autoView;
     }
 	

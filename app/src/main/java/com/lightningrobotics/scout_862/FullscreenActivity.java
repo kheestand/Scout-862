@@ -266,7 +266,6 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
                 if (v == lastMatchButton)
                     matchCounter--;
                 autoActivity.resetAutoVisibility();
-                teleopActivity.resetTeleopVisibility();
                 //Read the values from an array
                 readMain();
                 autoActivity.readAuto();
@@ -282,8 +281,6 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
     public void writeMain()
     {
-        //copy data from the excel sheet to an array
-        appData = fileUtils.excelToArray(getPath(), extPath);
         appData[1][matchCounter] = scouterName.getText().toString();
     }
 
@@ -332,9 +329,9 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             robotPic.setImageResource(imageUtils.getDefaultImageId());
         else
             robotPic.setImageResource(imageUtils.getImageId());
+
         autoActivity.readAuto();
         teleopActivity.readTeleop();
-        endActivity.readEnd();
     }
 
     public String getPath()

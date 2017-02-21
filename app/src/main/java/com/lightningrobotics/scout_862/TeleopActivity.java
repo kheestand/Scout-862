@@ -20,6 +20,7 @@ import static com.lightningrobotics.scout_862.FileUtils.addToArray;
 import static com.lightningrobotics.scout_862.FileUtils.appData;
 import static com.lightningrobotics.scout_862.FileUtils.matchCounter;
 import static com.lightningrobotics.scout_862.FullscreenActivity.importedData;
+import static com.lightningrobotics.scout_862.ObjectUtils.writeCheckBox;
 import static java.lang.String.valueOf;
 
 public class TeleopActivity extends Fragment implements View.OnClickListener {
@@ -64,6 +65,7 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        System.out.println("onCreateView: Teleop");
         // Inflate the layout for this fragment
         teleopView = inflater.inflate(R.layout.fragment_teleop, container, false);
         lastCycleButton = (Button) teleopView.findViewById(R.id.btn_previous_cycle);
@@ -114,7 +116,6 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
 
         lowRadioGroup.setVisibility(View.GONE);
         highRadioGroup.setVisibility(View.GONE);
-
         return teleopView;
     }
 
@@ -122,7 +123,15 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
     {
         writeLowAndHighArray();
         addToArray(12,matchCounter,valueOf(tv_gearCount.getText()));
+        if(highButton.isChecked())
+            appData[17][matchCounter] = "1";
+        else
+            appData[17][matchCounter] = "0";
         addToArray(15,matchCounter,valueOf(getHighAverage()));
+        if(lowButton.isChecked())
+            appData[17][matchCounter] = "1";
+        else
+            appData[17][matchCounter] = "0";
         addToArray(18,matchCounter,valueOf(getLowAverage()));
         addToArray(19,matchCounter,valueOf(cycleNum));
     }
@@ -134,6 +143,26 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
         tv_gearCount.setText(appData[12][matchCounter]);
         cycleNum = Integer.parseInt(appData[19][matchCounter]);
         tv_cycleNumber.setText(appData[19][matchCounter]);
+        if(appData[14][matchCounter].equals("1"))
+        {
+            highRadioGroup.setVisibility(View.VISIBLE);
+            highButton.setChecked(true);
+        }
+        else
+        {
+            highRadioGroup.setVisibility(View.GONE);
+            highButton.setChecked(false);
+        }
+        if(appData[17][matchCounter].equals("1"))
+        {
+            lowRadioGroup.setVisibility(View.VISIBLE);
+            lowButton.setChecked(true);
+        }
+        else
+        {
+            lowRadioGroup.setVisibility(View.GONE);
+            lowButton.setChecked(false);
+        }
     }
 
     @Override
@@ -141,17 +170,23 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
 
         if(importedData != false) {
             if (v == highButton) {
-                if (highButton.isChecked())
+                if (highButton.isChecked()) {
                     highRadioGroup.setVisibility(View.VISIBLE);
-                else
+                    appData[14][matchCounter] = "1";
+                } else {
                     highRadioGroup.setVisibility(View.GONE);
+                    appData[14][matchCounter] = "0";
+                }
             }
 
             if (v == lowButton) {
-                if (lowButton.isChecked())
+                if (lowButton.isChecked()) {
                     lowRadioGroup.setVisibility(View.VISIBLE);
-                else
+                    appData[17][matchCounter] = "1";
+                } else {
                     lowRadioGroup.setVisibility(View.GONE);
+                    appData[17][matchCounter] = "0";
+                }
             }
 
 
@@ -180,6 +215,8 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
 
     public void resetTeleopVisibility()
     {
+        lowButton.setChecked(false);
+        highButton.setChecked(false);
         lowRadioGroup.setVisibility(View.GONE);
         highRadioGroup.setVisibility(View.GONE);
     }

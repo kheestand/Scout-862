@@ -1,7 +1,5 @@
 package com.lightningrobotics.scout_862;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import static com.lightningrobotics.scout_862.FileUtils.addToArray;
 import static com.lightningrobotics.scout_862.FileUtils.appData;
@@ -30,10 +27,12 @@ public class EndActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        System.out.println("onCreateView: End");
         // Inflate the layout for this fragment
         endView = inflater.inflate(R.layout.fragment_end, container, false);
-
+        System.out.println(climb);
         climb = (CheckBox) endView.findViewById(R.id.cb_end_climb);
+        System.out.println(climb);
         collectFuel = (CheckBox) endView.findViewById(R.id.cb_end_collectFuel);
         stuckOnFuel = (CheckBox) endView.findViewById(R.id.cb_end_stuck);
         defence = (CheckBox) endView.findViewById(R.id.cb_end_def);
