@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
+    public static boolean[] fragmentArray = new boolean[3];
 
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);

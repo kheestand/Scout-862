@@ -10,14 +10,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import org.apache.poi.hssf.record.BookBoolRecord;
-import org.apache.poi.sl.usermodel.Line;
-
 import static com.lightningrobotics.scout_862.FileUtils.addToArray;
 import static com.lightningrobotics.scout_862.FileUtils.appData;
 import static com.lightningrobotics.scout_862.FileUtils.matchCounter;
 import static com.lightningrobotics.scout_862.ObjectUtils.readCheckBox;
 import static com.lightningrobotics.scout_862.ObjectUtils.writeCheckBox;
+import static com.lightningrobotics.scout_862.PagerAdapter.fragmentArray;
 
 public class AutoActivity extends Fragment implements View.OnClickListener {
     // Called once the Fragment has been created in order for it to
@@ -38,6 +36,7 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         System.out.println("onCreateView: Auto");
+        fragmentArray[0] = true;
         autoView = inflater.inflate(R.layout.fragment_auto, container, false);
         // Inflate the layout for this fragment
         //Set both autoView to view
@@ -54,10 +53,15 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
         autoLowBool.setOnClickListener(this);
         autoHighBool.setOnClickListener(this);
         autoGearBool.setOnClickListener(this);
-
         return autoView;
     }
-	
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        fragmentArray[0] = false;
+    }
+
     public void writeAuto()
     {
         writeCheckBox(autoLowBool,3);
@@ -71,11 +75,42 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
     public void readAuto()
     {
         autoLowBool = readCheckBox(autoLowBool,3);
-        autoLowNum.setText(appData[2][matchCounter]);
+        autoLowNum.setText(appData[4][matchCounter]);
         autoHighBool = readCheckBox(autoHighBool,5);
         autoHighNum.setText(appData[6][matchCounter]);
-        autoGearBool= readCheckBox(autoGearBool,9);
+        autoGearBool = readCheckBox(autoGearBool,9);
         autoGearNum.setText(appData[10][matchCounter]);
+
+        if(appData[3][matchCounter].equals("1"))
+        {
+            lowGoalLayout.setVisibility(View.VISIBLE);
+            autoLowBool.setChecked(true);
+        }
+        else
+        {
+            lowGoalLayout.setVisibility(View.GONE);
+            autoLowBool.setChecked(false);
+        }
+        if(appData[5][matchCounter].equals("1"))
+        {
+            highGoalLayout.setVisibility(View.VISIBLE);
+            autoHighBool.setChecked(true);
+        }
+        else
+        {
+            highGoalLayout.setVisibility(View.GONE);
+            autoHighBool.setChecked(false);
+        }
+        if(appData[9][matchCounter].equals("1"))
+        {
+            gearLayout.setVisibility(View.VISIBLE);
+            autoGearBool.setChecked(true);
+        }
+        else
+        {
+            gearLayout.setVisibility(View.GONE);
+            autoGearBool.setChecked(false);
+        }
 	}
 
     @Override
@@ -85,7 +120,6 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
                 lowGoalLayout.setVisibility(View.VISIBLE);
             else
                 lowGoalLayout.setVisibility(View.GONE);
-
         }
 
         if (v == autoHighBool) {
@@ -93,7 +127,6 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
                 highGoalLayout.setVisibility(View.VISIBLE);
             else
                 highGoalLayout.setVisibility(View.GONE);
-
         }
 
         if (v == autoGearBool) {
@@ -101,14 +134,6 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
                 gearLayout.setVisibility(View.VISIBLE);
             else
                 gearLayout.setVisibility(View.GONE);
-
         }
-
-    }
-    public void resetAutoVisibility()
-    {
-        lowGoalLayout.setVisibility(View.GONE);
-        highGoalLayout.setVisibility(View.GONE);
-        gearLayout.setVisibility(View.GONE);
     }
 }

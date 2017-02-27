@@ -1,5 +1,6 @@
 package com.lightningrobotics.scout_862;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import static com.lightningrobotics.scout_862.FileUtils.appData;
 import static com.lightningrobotics.scout_862.FileUtils.matchCounter;
 import static com.lightningrobotics.scout_862.ObjectUtils.readCheckBox;
 import static com.lightningrobotics.scout_862.ObjectUtils.writeCheckBox;
+import static com.lightningrobotics.scout_862.PagerAdapter.fragmentArray;
 import static java.lang.String.valueOf;
 
 public class EndActivity extends Fragment {
@@ -28,17 +30,21 @@ public class EndActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         System.out.println("onCreateView: End");
+        fragmentArray[2] = true;
         // Inflate the layout for this fragment
         endView = inflater.inflate(R.layout.fragment_end, container, false);
-        System.out.println(climb);
         climb = (CheckBox) endView.findViewById(R.id.cb_end_climb);
-        System.out.println(climb);
         collectFuel = (CheckBox) endView.findViewById(R.id.cb_end_collectFuel);
         stuckOnFuel = (CheckBox) endView.findViewById(R.id.cb_end_stuck);
         defence = (CheckBox) endView.findViewById(R.id.cb_end_def);
         comments = (EditText) endView.findViewById(R.id.et_otherCpmments);
-
         return endView;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        fragmentArray[2] = false;
     }
 
     public void writeEnd()

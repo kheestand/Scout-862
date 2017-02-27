@@ -16,7 +16,6 @@ public class ObjectUtils
 {
     public static CheckBox readCheckBox(CheckBox cb, int xValue)
     {
-        System.out.println("readCheckBoxIn: " + cb);
         if(cb == null)
         {
             /**
@@ -24,7 +23,7 @@ public class ObjectUtils
              * A checkbox returning a null is most likely because the fragment
              * it is a part of has not yet been created.
              */
-            System.out.println("null");
+            System.out.println("cb is null");
         }
         if(appData[xValue][matchCounter].equals("1"))
             cb.setChecked(true);
@@ -46,7 +45,7 @@ public class ObjectUtils
     {
         if(rb == null)
         {
-            System.out.println("null");
+            System.out.println("rb is null");
         }
         String idAsString = rb.getResources().getResourceName(rb.getId());
         String[] splitIDdAsString = idAsString.split("_");
@@ -54,7 +53,6 @@ public class ObjectUtils
         int[][]array = lowCycleData;
         if(splitIDdAsString[2].equals("high"))
             array = highCycleData;
-
         if(array[cycleNum][matchCounter] == cbNum)
             rb.setChecked(true);
         else

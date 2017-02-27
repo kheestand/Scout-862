@@ -27,14 +27,14 @@ public class FileUtils {
     public static String[][] appData;
     public static int matchCounter = 1;
 
-    public String[][] excelToArray(String path, File extDir)
+    public String[][] excelToArray(String path)
     {
         File file;
         String[][] data = new String[maxX][maxY];
         try {
             // First, read the file
             if (path.equals("")) {
-                file = new File(extDir, "data.xls");
+                file = new File("/sdcard/data.xls");
             } else {
                 file = new File(path);
             }
@@ -71,7 +71,53 @@ public class FileUtils {
         return data;
         }
 
-    public void arrayToExcel(String path, File extDir)
+    public void collumnToExcel(String path, File extDir)
+    {
+        File file;
+        try {
+            //New Workbook
+            Workbook wb = new HSSFWorkbook();
+            //New Cell
+            Cell c = null;
+            //New Sheet
+            Sheet sheet1 = null;
+            sheet1 = wb.createSheet("Sheet1");
+
+                for(int x = 0; x < maxX; x++)
+                {
+                    Row row = sheet1.createRow(matchCounter);
+                    c = row.createCell(x);
+                    if (appData[x][matchCounter].equals("")) {
+                        c.setCellValue("0");
+                    } else {
+                        c.setCellValue(appData[x][matchCounter]);
+                    }
+                }
+
+
+            // Create a path where we will place our List of objects on external storage
+            if (path.equals("")) {
+                file = new File("/sdcard/data.xls");
+            } else {
+                file = new File(path);
+            }
+            FileOutputStream os = null;
+            try {
+                os = new FileOutputStream(file);
+                wb.write(os);
+            } catch (IOException e) {
+            } catch (Exception e) {
+            } finally {
+                try {
+                    if (null != os)
+                        os.close();
+                } catch (Exception ex) {
+                }
+            }
+        }catch (Exception e){e.printStackTrace(); }
+    }
+
+    public void arrayToExcel(String path)
     {
         File file;
         try {
@@ -87,9 +133,14 @@ public class FileUtils {
                 Row row = sheet1.createRow(y);
                 for (int x = 0; x < maxX; x++) {
                     c = row.createCell(x);
+                    if(x == 1 || x == 24)
+                    {
+                        c.setCellValue("");
+                    }
                     if (appData[x][y].equals("")) {
                         c.setCellValue("0");
-                    } else {
+                    }
+                    else {
                         c.setCellValue(appData[x][y]);
                     }
                 }
@@ -97,7 +148,7 @@ public class FileUtils {
 
             // Create a path where we will place our List of objects on external storage
             if (path.equals("")) {
-                file = new File(extDir, "data.xls");
+                file = new File("/sdcard/data.xls");
             } else {
                 file = new File(path);
             }

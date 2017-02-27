@@ -186,16 +186,15 @@
                 android:layout_alignEnd="@+id/tv_scouter_text"
                 android:hint="Enter Your Name" />
 
-            <EditText
+            <Button
+                android:text="Get FIle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:id="@+id/et_path"
                 android:layout_alignParentBottom="true"
                 android:layout_toRightOf="@+id/iv_robot_picture"
-                android:layout_toEndOf="@+id/iv_robot_picture"
-                android:hint="Storage Path For Sheet"
-                android:inputType="text" />
+                android:id="@+id/btn_getFile"
+                android:layout_alignRight="@+id/et_scouter_name"
+                android:layout_alignEnd="@+id/et_scouter_name" />
 
         </RelativeLayout>
 

@@ -1,6 +1,7 @@
 package com.lightningrobotics.scout_862;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -11,12 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
-
 import java.io.File;
 
 import static com.lightningrobotics.scout_862.CycleData.makeCycleArrays;
 import static com.lightningrobotics.scout_862.FileUtils.appData;
 import static com.lightningrobotics.scout_862.FileUtils.matchCounter;
+import static com.lightningrobotics.scout_862.PagerAdapter.fragmentArray;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -28,8 +29,8 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
     ImageUtils imageUtils = new ImageUtils(this);
     AutoActivity autoActivity = new AutoActivity();
     TeleopActivity teleopActivity = new TeleopActivity();
+    FileExplorer fileExplorer = new FileExplorer();
     EndActivity endActivity = new EndActivity();
-    public File extPath;
     Button lastMatchButton;
     Button nextMatchButton;
     TextView allianceText;
@@ -37,9 +38,10 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
     TextView matchNumber;
     TextView teamNumber;
     EditText scouterName;
-    EditText path;
     ImageView robotPic;
     TabLayout tabLayout;
+    Button launchFileExplorer;
+    File file = new File("/sdcard/Data.xls");
     public static String PACKAGE_NAME;
     public static boolean importedData = false;
 
@@ -121,7 +123,6 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         //Set Package name
         PACKAGE_NAME = getApplicationContext().getPackageName();
 
-        extPath = new File(this.getExternalFilesDir(null), "data.xls");
         lastMatchButton = (Button) findViewById(R.id.btn_previous_match);
         nextMatchButton = (Button) findViewById(R.id.btn_next_match);
         allianceText = (TextView) findViewById(R.id.tv_alliance_text);
@@ -130,15 +131,16 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         teamNumber = (TextView) findViewById(R.id.tv_team_number);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         scouterName = (EditText) findViewById(R.id.et_scouter_name);
-        path = (EditText) findViewById(R.id.et_path);
         robotPic = (ImageView) findViewById(R.id.iv_robot_picture);
+        launchFileExplorer = (Button) findViewById(R.id.btn_getFile);
         lastMatchButton.setOnClickListener(this);
         nextMatchButton.setOnClickListener(this);
         allianceText.setOnClickListener(this);
+        launchFileExplorer.setOnClickListener(this);
 
         mVisible = true;
         //mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.iv_robot_picture);
+        mContentView = findViewById(R.id.bottom_layout);
 
 
         // Set up the user interaction to manually show or hide the system UI.
@@ -240,14 +242,24 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void onClick(View v) {
-        if (v == allianceText) {
-            makeCycleArrays();
-            File file = new File(path.getText().toString());
-            if (file.exists())
+        if(v == launchFileExplorer)
+        {
+            Intent fileExplorerLaunch = new Intent(FullscreenActivity.this, FileExplorer.class);
+            startActivity(fileExplorerLaunch);
+        }
+
+        if(v == allianceText)
+        {
+            file = new File(fileExplorer.sheetPath);
+            if (file.exists()) {
+                makeCycleArrays();
+                System.out.println(fileExplorer.sheetPath);
                 importData();
+            }
             else
-                Toast.makeText(getApplicationContext(), path.toString() + " does not exist",
+                Toast.makeText(getApplicationContext(), fileExplorer.sheetPath + " does not exist",
                         Toast.LENGTH_LONG).show();
+            fileUtils.arrayToExcel(fileExplorer.sheetPath);
         }
 
         if (importedData != false) {
@@ -259,13 +271,11 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
                 endActivity.writeEnd();
 
                 //Copy that array to an excel sheet
-                fileUtils.arrayToExcel(getPath(), extPath);
-
+                fileUtils.arrayToExcel(fileExplorer.sheetPath);
                 if (v == nextMatchButton)
                     matchCounter++;
                 if (v == lastMatchButton)
                     matchCounter--;
-                autoActivity.resetAutoVisibility();
                 //Read the values from an array
                 readMain();
                 autoActivity.readAuto();
@@ -273,7 +283,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
                 endActivity.readEnd();
             }
         } else {
-            matchCounter = 0;
+            matchCounter = 1;
             Toast.makeText(getApplicationContext(), "Import Data by pressing \"Alliance\"",
                     Toast.LENGTH_LONG).show();
         }
@@ -303,7 +313,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         //Set the "importedData" flag to true
         importedData = true;
         //copy data from the excel sheet to an array
-        appData = fileUtils.excelToArray(getPath(), extPath);
+        appData = fileUtils.excelToArray(fileExplorer.sheetPath);
         //the cell at the position 0,0 is the alliance number
         allianceNumber.setText(appData[0][0]);
         //Switch statement to change the background of the top view
@@ -330,13 +340,11 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         else
             robotPic.setImageResource(imageUtils.getImageId());
 
-        autoActivity.readAuto();
-        teleopActivity.readTeleop();
+        if(fragmentArray[0] == true)
+            autoActivity.readAuto();
+        if(fragmentArray[1] == true)
+            teleopActivity.readTeleop();
+        if(fragmentArray[2] == true)
+            endActivity.readEnd();
     }
-
-    public String getPath()
-    {
-        return path.getText().toString();
-    }
-
 }

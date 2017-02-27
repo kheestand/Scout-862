@@ -21,6 +21,7 @@ import static com.lightningrobotics.scout_862.FileUtils.appData;
 import static com.lightningrobotics.scout_862.FileUtils.matchCounter;
 import static com.lightningrobotics.scout_862.FullscreenActivity.importedData;
 import static com.lightningrobotics.scout_862.ObjectUtils.writeCheckBox;
+import static com.lightningrobotics.scout_862.PagerAdapter.fragmentArray;
 import static java.lang.String.valueOf;
 
 public class TeleopActivity extends Fragment implements View.OnClickListener {
@@ -66,6 +67,7 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         System.out.println("onCreateView: Teleop");
+        fragmentArray[1] = true;
         // Inflate the layout for this fragment
         teleopView = inflater.inflate(R.layout.fragment_teleop, container, false);
         lastCycleButton = (Button) teleopView.findViewById(R.id.btn_previous_cycle);
@@ -117,6 +119,12 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
         lowRadioGroup.setVisibility(View.GONE);
         highRadioGroup.setVisibility(View.GONE);
         return teleopView;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        fragmentArray[1] = false;
     }
 
     public void writeTeleop()
@@ -209,15 +217,7 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
             }
         }
         else {
-            matchCounter = 0;
+            matchCounter = 1;
         }
-    }
-
-    public void resetTeleopVisibility()
-    {
-        lowButton.setChecked(false);
-        highButton.setChecked(false);
-        lowRadioGroup.setVisibility(View.GONE);
-        highRadioGroup.setVisibility(View.GONE);
     }
 }
