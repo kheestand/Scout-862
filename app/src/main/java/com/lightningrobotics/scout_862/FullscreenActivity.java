@@ -2,6 +2,9 @@ package com.lightningrobotics.scout_862;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -41,7 +44,6 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
     ImageView robotPic;
     TabLayout tabLayout;
     Button launchFileExplorer;
-    File file = new File("/sdcard/Data.xls");
     public static String PACKAGE_NAME;
     public static boolean importedData = false;
 
@@ -250,7 +252,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
 
         if(v == allianceText)
         {
-            file = new File(fileExplorer.sheetPath);
+            File file = new File(fileExplorer.sheetPath);
             if (file.exists()) {
                 makeCycleArrays();
                 System.out.println(fileExplorer.sheetPath);
@@ -300,12 +302,12 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         teamNumber.setText(appData[0][matchCounter]);
         scouterName.setText(appData[1][matchCounter]);
         //Set and get image
-        imageUtils.setImageId(appData[0][matchCounter]);
-
-        if(imageUtils.getImageId() == 0)
-            robotPic.setImageResource(imageUtils.getDefaultImageId());
+        File robotImage = new File(imageUtils.getTeamPicturePath(appData[0][matchCounter]));
+        System.out.println(robotImage.getAbsolutePath());
+        if(!robotImage.exists())
+            robotPic.setImageBitmap(imageUtils.getDefaultImage());
         else
-            robotPic.setImageResource(imageUtils.getImageId());
+            robotPic.setImageBitmap(BitmapFactory.decodeFile(imageUtils.getTeamPicturePath(appData[0][matchCounter])));
     }
 
     public void importData()
@@ -325,7 +327,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             case 'b': tabLayout.setBackgroundColor(getResources().getColor(R.color.colorFirstBlue));
                 tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorFirstCCfour));
                 break;
-            default: tabLayout.setBackgroundColor(getResources().getColor(R.color.colorFirstCCeight));
+            default: tabLayout.setBackgroundColor(getResources().getColor(R.color.colorFirstCCseven));
                 break;
         }
         //the value in the first collumn is for the current team
@@ -333,18 +335,15 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         scouterName.setText(appData[1][matchCounter]);
         matchNumber.setText(String.format("%01d",matchCounter));
         //Set and get image
-        imageUtils.setImageId(appData[0][matchCounter]);
-
-        if(imageUtils.getImageId() == 0)
-            robotPic.setImageResource(imageUtils.getDefaultImageId());
+        File robotImage = new File(imageUtils.getTeamPicturePath(appData[0][matchCounter]));
+        System.out.println(robotImage.getAbsolutePath());
+        if(!robotImage.exists())
+            robotPic.setImageBitmap(imageUtils.getDefaultImage());
         else
-            robotPic.setImageResource(imageUtils.getImageId());
+            robotPic.setImageBitmap(BitmapFactory.decodeFile(imageUtils.getTeamPicturePath(appData[0][matchCounter])));
 
-        if(fragmentArray[0] == true)
-            autoActivity.readAuto();
-        if(fragmentArray[1] == true)
-            teleopActivity.readTeleop();
-        if(fragmentArray[2] == true)
-            endActivity.readEnd();
+        autoActivity.readAuto();
+        teleopActivity.readTeleop();
+        endActivity.readEnd();
     }
 }

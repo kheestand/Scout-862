@@ -1,5 +1,9 @@
 package com.lightningrobotics.scout_862;
 
+import android.content.Context;
+import android.os.Environment;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,6 +20,18 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import static android.os.Environment.MEDIA_BAD_REMOVAL;
+import static android.os.Environment.MEDIA_CHECKING;
+import static android.os.Environment.MEDIA_EJECTING;
+import static android.os.Environment.MEDIA_MOUNTED;
+import static android.os.Environment.MEDIA_MOUNTED_READ_ONLY;
+import static android.os.Environment.MEDIA_NOFS;
+import static android.os.Environment.MEDIA_REMOVED;
+import static android.os.Environment.MEDIA_SHARED;
+import static android.os.Environment.MEDIA_UNKNOWN;
+import static android.os.Environment.MEDIA_UNMOUNTABLE;
+import static android.os.Environment.MEDIA_UNMOUNTED;
+
 /**
  * Created by khees on 12/28/2016.
  */
@@ -27,17 +43,12 @@ public class FileUtils {
     public static String[][] appData;
     public static int matchCounter = 1;
 
-    public String[][] excelToArray(String path)
-    {
+    public String[][] excelToArray(String path) {
         File file;
         String[][] data = new String[maxX][maxY];
         try {
-            // First, read the file
-            if (path.equals("")) {
-                file = new File("/sdcard/data.xls");
-            } else {
-                file = new File(path);
-            }
+
+            file = new File(path);
 
             FileInputStream myInput = new FileInputStream(file);
             // Create a POIFSFileSystem object
@@ -55,24 +66,24 @@ public class FileUtils {
                     data[x][y] = "0";
                 }
             }
-            for(int y = 0; y < maxY; y++){
+            for (int y = 0; y < maxY; y++) {
                 HSSFRow myRow = (HSSFRow) rowIter.next();
                 Iterator cellIter = myRow.cellIterator();
-                for(int x = 0; x < maxX; x++) {
+                for (int x = 0; x < maxX; x++) {
                     HSSFCell myCell = (HSSFCell) cellIter.next();
                     data[x][y] = myCell.toString();
                     //get rid of periods
                     data[x][y] = data[x][y].replaceAll("[.]", "period");
                     data[x][y] = data[x][y].replaceAll("period0", "");
-                    //System.out.println(x + ", " + y + ": " + data[x][y]);
-                    }
                 }
-            }catch (Exception e){e.printStackTrace(); }
-        return data;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return data;
+    }
 
-    public void collumnToExcel(String path, File extDir)
-    {
+    public void collumnToExcel(String path, File extDir) {
         File file;
         try {
             //New Workbook
@@ -83,24 +94,20 @@ public class FileUtils {
             Sheet sheet1 = null;
             sheet1 = wb.createSheet("Sheet1");
 
-                for(int x = 0; x < maxX; x++)
-                {
-                    Row row = sheet1.createRow(matchCounter);
-                    c = row.createCell(x);
-                    if (appData[x][matchCounter].equals("")) {
-                        c.setCellValue("0");
-                    } else {
-                        c.setCellValue(appData[x][matchCounter]);
-                    }
+            for (int x = 0; x < maxX; x++) {
+                Row row = sheet1.createRow(matchCounter);
+                c = row.createCell(x);
+                if (appData[x][matchCounter].equals("")) {
+                    c.setCellValue("0");
+                } else {
+                    c.setCellValue(appData[x][matchCounter]);
                 }
+            }
 
 
             // Create a path where we will place our List of objects on external storage
-            if (path.equals("")) {
-                file = new File("/sdcard/data.xls");
-            } else {
-                file = new File(path);
-            }
+
+            file = new File(path);
             FileOutputStream os = null;
             try {
                 os = new FileOutputStream(file);
@@ -114,11 +121,12 @@ public class FileUtils {
                 } catch (Exception ex) {
                 }
             }
-        }catch (Exception e){e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void arrayToExcel(String path)
-    {
+    public void arrayToExcel(String path) {
         File file;
         try {
             //New Workbook
@@ -133,25 +141,19 @@ public class FileUtils {
                 Row row = sheet1.createRow(y);
                 for (int x = 0; x < maxX; x++) {
                     c = row.createCell(x);
-                    if(x == 1 || x == 24)
-                    {
+                    if (x == 1 || x == 24) {
                         c.setCellValue("");
                     }
                     if (appData[x][y].equals("")) {
                         c.setCellValue("0");
-                    }
-                    else {
+                    } else {
                         c.setCellValue(appData[x][y]);
                     }
                 }
             }
 
             // Create a path where we will place our List of objects on external storage
-            if (path.equals("")) {
-                file = new File("/sdcard/data.xls");
-            } else {
-                file = new File(path);
-            }
+            file = new File(path);
             FileOutputStream os = null;
             try {
                 os = new FileOutputStream(file);
@@ -165,11 +167,12 @@ public class FileUtils {
                 } catch (Exception ex) {
                 }
             }
-        }catch (Exception e){e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void addToArray(int colNum, int rowNum, String value)
-    {
+    public static void addToArray(int colNum, int rowNum, String value) {
         appData[colNum][rowNum] = value;
     }
 }

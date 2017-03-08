@@ -27,7 +27,7 @@ public class FileExplorer extends ListActivity{
         setContentView(R.layout.activity_file_explorer);
 
         // Use the current directory as title
-        path = "/";
+        path = "/sdcard/";
         if (getIntent().hasExtra("path")) {
             path = getIntent().getStringExtra("path");
         }
