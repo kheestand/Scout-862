@@ -303,14 +303,11 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         teamNumber.setText(appData[0][matchCounter]);
         scouterName.setText(appData[1][matchCounter]);
         //Set and get image
-        File robotImage = new File(imageUtils.getTeamPicturePath(appData[0][matchCounter]));
-        if(!robotImage.exists())
+        File robotImage = imageUtils.getFile(appData[0][matchCounter]);
+        if(robotImage == null)
             robotPic.setImageBitmap(imageUtils.getDefaultImage());
         else
-        {
-            Bitmap robotBitmap = BitmapFactory.decodeFile(robotImage.getAbsolutePath());
-            robotPic.setImageBitmap(robotBitmap);
-        }
+            robotPic.setImageBitmap(BitmapFactory.decodeFile(robotImage.getAbsolutePath()));
     }
 
     public void importData()
@@ -338,14 +335,11 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         scouterName.setText(appData[1][matchCounter]);
         matchNumber.setText(String.format("%01d",matchCounter));
         //Set and get image
-        File robotImage = new File(imageUtils.getTeamPicturePath(appData[0][matchCounter]));
-        if(!robotImage.exists())
+        File robotImage = imageUtils.getFile(appData[0][matchCounter]);
+        if(robotImage == null)
             robotPic.setImageBitmap(imageUtils.getDefaultImage());
         else
-        {
-            Bitmap robotBitmap = BitmapFactory.decodeFile(robotImage.getAbsolutePath());
-            robotPic.setImageBitmap(robotBitmap);
-        }
+            robotPic.setImageBitmap(BitmapFactory.decodeFile(robotImage.getAbsolutePath()));
         autoActivity.readAuto();
         teleopActivity.readTeleop();
         endActivity.readEnd();

@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 
+import java.io.File;
+
 import static android.support.v4.content.ContextCompat.getDrawable;
 import static java.security.AccessController.getContext;
 
@@ -17,6 +19,8 @@ import static java.security.AccessController.getContext;
 public class ImageUtils {
 
     private Context context;
+    private String fileExtention = ".jpg";
+    private String[] validFileExtentions = {".jpg","jpeg",".png",".bmp",".gif"};
 
     public ImageUtils(Context current)
     {
@@ -28,23 +32,15 @@ public class ImageUtils {
         return BitmapFactory.decodeResource(context.getResources(), R.drawable.default_robot);
     }
 
-    public Bitmap getTeamPicture(int teamNum)
+    public File getFile(String teamNum)
     {
-        return BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/Pictures/" + "robot_" + teamNum + ".jpg");
-    }
-
-    public Bitmap getTeamPicture(String teamNum)
-    {
-        return BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/Pictures/" + "robot_" + teamNum + ".jpg");
-    }
-
-    public String getTeamPicturePath(int teamNum)
-    {
-        return Environment.getExternalStorageDirectory() + "/Pictures/" + "robot_" + teamNum + ".jpg";
-    }
-
-    public String getTeamPicturePath(String teamNum)
-    {
-        return Environment.getExternalStorageDirectory() + "/Pictures/" + "robot_" + teamNum + ".jpg";
+        for(int i = 0; i < validFileExtentions.length; i++)
+        {
+            String path = Environment.getExternalStorageDirectory() + "/Pictures/" + "robot_" + teamNum + validFileExtentions[i];
+            File picture = new File(path);
+            if(picture.exists())
+                return picture;
+        }
+        return null;
     }
 }
