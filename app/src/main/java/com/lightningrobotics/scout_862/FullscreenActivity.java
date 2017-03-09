@@ -2,6 +2,7 @@ package com.lightningrobotics.scout_862;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
@@ -303,11 +304,13 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         scouterName.setText(appData[1][matchCounter]);
         //Set and get image
         File robotImage = new File(imageUtils.getTeamPicturePath(appData[0][matchCounter]));
-        System.out.println(robotImage.getAbsolutePath());
         if(!robotImage.exists())
             robotPic.setImageBitmap(imageUtils.getDefaultImage());
         else
-            robotPic.setImageBitmap(BitmapFactory.decodeFile(imageUtils.getTeamPicturePath(appData[0][matchCounter])));
+        {
+            Bitmap robotBitmap = BitmapFactory.decodeFile(robotImage.getAbsolutePath());
+            robotPic.setImageBitmap(robotBitmap);
+        }
     }
 
     public void importData()
@@ -336,12 +339,13 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         matchNumber.setText(String.format("%01d",matchCounter));
         //Set and get image
         File robotImage = new File(imageUtils.getTeamPicturePath(appData[0][matchCounter]));
-        System.out.println(robotImage.getAbsolutePath());
         if(!robotImage.exists())
             robotPic.setImageBitmap(imageUtils.getDefaultImage());
         else
-            robotPic.setImageBitmap(BitmapFactory.decodeFile(imageUtils.getTeamPicturePath(appData[0][matchCounter])));
-
+        {
+            Bitmap robotBitmap = BitmapFactory.decodeFile(robotImage.getAbsolutePath());
+            robotPic.setImageBitmap(robotBitmap);
+        }
         autoActivity.readAuto();
         teleopActivity.readTeleop();
         endActivity.readEnd();
