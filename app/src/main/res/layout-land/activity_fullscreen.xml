@@ -1,4 +1,4 @@
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,44 +11,51 @@
         android:layout_width="match_parent"
         android:id="@+id/bottom_layout"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_height="match_parent"
-        android:layout_marginTop="255dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_toEndOf="@+id/top_layout"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/top_layout">
 
-<!--        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="@color/colorPrimary"
-            android:elevation="6dp"
-            android:minHeight="?attr/actionBarSize"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
--->
+        <!--        <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/colorPrimary"
+                    android:elevation="6dp"
+                    android:minHeight="?attr/actionBarSize"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        -->
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colorPrimary"
             android:elevation="6dp"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:tabIndicatorColor="@color/colorFirstBlack" />
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/top_layout"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="match_parent"
         android:weightSum="1"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_width="450dp">
 
         <Button
             android:layout_width="86dp"
@@ -58,11 +65,10 @@
             android:layout_marginTop="50dp" />
 
         <RelativeLayout
-            android:layout_width="400dp"
+            android:layout_width="272dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="0.71">
+            android:layout_marginRight="10dp">
 
             <TextView
                 android:text="0"
@@ -82,31 +88,6 @@
                 android:text="N/A"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_team_text"
-                android:id="@+id/tv_team_number"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textSize="30sp"
-                android:textAlignment="center"
-                android:textColor="@color/colorFirstBlack" />
-
-            <TextView
-                android:text="@string/team_text"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_team_text"
-                android:textSize="35sp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textAlignment="center"
-                android:textColor="@color/colorFirstBlack"
-                android:background="@color/colorFirstGrey" />
-
-            <TextView
-                android:text="N/A"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/tv_alliance_position"
                 android:layout_below="@+id/tv_alliance_text"
                 android:layout_alignParentLeft="true"
@@ -117,17 +98,6 @@
                 android:layout_alignRight="@+id/tv_alliance_text"
                 android:layout_alignEnd="@+id/tv_alliance_text"
                 android:textColor="@color/colorFirstBlack" />
-
-            <TextView
-                android:text="@string/match_text"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_match_text"
-                android:textSize="35sp"
-                android:layout_width="100dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/colorFirstBlack"
-                android:background="@color/colorFirstGrey" />
 
             <TextView
                 android:text="@string/alliance_text"
@@ -142,16 +112,30 @@
                 android:background="@color/colorFirstGrey"
                 android:clickable="true" />
 
-            <ImageView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_alliance_position"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_below="@+id/tv_scouter_text"
+                android:id="@+id/et_scouter_name"
+                android:layout_alignRight="@+id/tv_scouter_text"
+                android:layout_alignEnd="@+id/tv_scouter_text"
+                android:hint="Enter Your Name"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/iv_robot_picture"
-                android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@+id/tv_scouter_text"
-                android:layout_toStartOf="@+id/tv_scouter_text" />
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="@string/match_text"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_match_text"
+                android:textSize="35sp"
+                android:layout_width="100dp"
+                android:textColor="@color/colorFirstBlack"
+                android:background="@color/colorFirstGrey"
+                android:layout_below="@+id/tv_team_number"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:text="Scouter Name"
@@ -159,38 +143,55 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_scouter_text"
                 android:textSize="25sp"
-                android:layout_marginRight="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="10dp"
                 android:textColor="@color/colorFirstBlack"
-                android:background="@color/colorFirstGrey" />
+                android:background="@color/colorFirstGrey"
+                android:layout_below="@+id/tv_match_number"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-            <EditText
+            <TextView
+                android:text="@string/team_text"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_team_text"
+                android:textSize="35sp"
+                android:textAlignment="center"
+                android:textColor="@color/colorFirstBlack"
+                android:background="@color/colorFirstGrey"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/tv_scouter_text"
+                android:layout_toRightOf="@+id/tv_scouter_text" />
+
+            <ImageView
+                android:id="@+id/iv_robot_picture"
+                android:layout_weight="1"
+                android:layout_marginTop="24dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_below="@+id/et_scouter_name"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="N/A"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_team_number"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:textColor="@color/colorFirstBlack"
+                android:layout_below="@+id/tv_team_text"
+                android:layout_alignLeft="@+id/btn_getFile"
+                android:layout_alignStart="@+id/btn_getFile" />
+
+            <Button
+                android:text="Get FIle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:ems="10"
-                android:layout_below="@+id/tv_scouter_text"
-                android:layout_toRightOf="@+id/iv_robot_picture"
-                android:id="@+id/et_scouter_name"
-                android:layout_alignRight="@+id/tv_scouter_text"
-                android:layout_alignEnd="@+id/tv_scouter_text"
-                android:hint="Enter Your Name" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:id="@+id/et_path"
+                android:id="@+id/btn_getFile"
                 android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@+id/iv_robot_picture"
-                android:layout_toEndOf="@+id/iv_robot_picture"
-                android:hint="Storage Path For Sheet"
-                android:inputType="text" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
@@ -204,4 +205,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</RelativeLayout>

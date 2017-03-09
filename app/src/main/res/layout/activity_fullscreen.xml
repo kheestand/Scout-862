@@ -133,7 +133,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/colorFirstBlack"
-                android:background="@color/colorFirstGrey" />
+                android:background="@color/colorFirstGrey"
+                android:layout_above="@+id/tv_team_number" />
 
             <TextView
                 android:text="@string/alliance_text"

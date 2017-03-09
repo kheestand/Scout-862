@@ -58,7 +58,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
      * user interaction before hiding the system UI.
      */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 300;
+    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
 
     /**
      * Some older devices needs a small delay between UI widget updates
@@ -93,7 +93,7 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
             if (actionBar != null) {
                 actionBar.show();
             }
-//            mControlsView.setVisibility(View.VISIBLE);
+            mControlsView.setVisibility(View.VISIBLE);
         }
     };
     private boolean mVisible;
@@ -141,9 +141,9 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         allianceText.setOnClickListener(this);
         launchFileExplorer.setOnClickListener(this);
 
-        mVisible = true;
+        mVisible = false;
         //mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.bottom_layout);
+        mContentView = findViewById(R.id.tv_alliance_position);
 
 
         // Set up the user interaction to manually show or hide the system UI.
@@ -157,7 +157,6 @@ public class FullscreenActivity extends AppCompatActivity implements View.OnClic
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        //findViewById(R.id.iv_robot_picture).setOnTouchListener(mDelayHideTouchListener);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
