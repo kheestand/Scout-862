@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lightningrobotics.scout_862.TeleopActivity"
-    android:background="@color/colorFirstCCtwo">
+    android:background="@color/colorFirstCCthree"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -96,173 +97,45 @@
                     android:textOff="Score in High Goal"
                     android:textOn="Score in High Goal" />
 
-                <RadioGroup
-                    android:layout_height="match_parent"
-                    android:id="@+id/rg_fuelHigh"
-                    android:layout_width="150dp"
+
+                <com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar
+                    android:layout_width="200dp"
+                    android:layout_height="180dp"
+                    android:id="@+id/picker_teleop_high"
+                    app:max="100"
+                    app:pointer_color="#0174DF"
+                    app:pointer_halo_color="#88252525"
+                    app:pointer_size="20dp"
+                    app:text_color="#000000"
+                    app:text_size="40sp"
+                    app:wheel_active_color="@color/colorFirstCCfour"
+                    app:wheel_unactive_color="#FFCCCCCC"
+                    android:layout_weight="1.15"
+                    android:layout_below="@+id/tb_scoreLow"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tb_scoreHigh"
-                    android:layout_toLeftOf="@+id/rg_fuelLow"
-                    android:layout_toStartOf="@+id/rg_fuelLow">
+                    android:layout_toLeftOf="@+id/tb_scoreLow"
+                    android:layout_toStartOf="@+id/tb_scoreLow"
+                    android:layout_alignBottom="@+id/picker_teleop_low" />
 
-                    <RadioButton
-                        android:text="0"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_0" />
-
-                    <RadioButton
-                        android:text="1-10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_1" />
-
-                    <RadioButton
-                        android:text="11-20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_2" />
-
-                    <RadioButton
-                        android:text="21-30"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_3" />
-
-                    <RadioButton
-                        android:text="31-40"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_4" />
-
-                    <RadioButton
-                        android:text="41-50"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_5" />
-
-                    <RadioButton
-                        android:text="51-60"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_6" />
-
-                    <RadioButton
-                        android:text="61-70"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_7" />
-
-                    <RadioButton
-                        android:text="71-80"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_8" />
-
-                    <RadioButton
-                        android:text="81-90"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_9" />
-
-                    <RadioButton
-                        android:text="91-100"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_10" />
-
-                    <RadioButton
-                        android:text="101+"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb_low_11"
-                        android:layout_weight="1" />
-
-                </RadioGroup>
-
-                <RadioGroup
-                    android:layout_height="match_parent"
-                    android:id="@+id/rg_fuelLow"
-                    android:layout_width="150dp"
+                <com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar
+                    android:layout_width="200dp"
+                    android:layout_height="180dp"
+                    app:max="100"
+                    app:pointer_color="#0174DF"
+                    app:pointer_halo_color="#88252525"
+                    app:pointer_size="20dp"
+                    app:text_color="#000000"
+                    app:text_size="40sp"
+                    app:wheel_active_color="@color/colorFirstCCfour"
+                    app:wheel_unactive_color="#FFCCCCCC"
+                    android:layout_weight="1.15"
                     android:layout_below="@+id/tb_scoreLow"
+                    android:layout_toRightOf="@+id/tb_scoreHigh"
                     android:layout_alignRight="@+id/tb_scoreLow"
-                    android:layout_alignEnd="@+id/tb_scoreLow">
+                    android:layout_alignEnd="@+id/tb_scoreLow"
+                    android:id="@+id/picker_teleop_low" />
 
-                <RadioButton
-                    android:text="0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_0" />
-
-                <RadioButton
-                    android:text="1-10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_1" />
-
-                <RadioButton
-                    android:text="11-20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_2" />
-
-                <RadioButton
-                    android:text="21-30"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_3" />
-
-                <RadioButton
-                    android:text="31-40"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_4" />
-
-                <RadioButton
-                    android:text="41-50"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_5" />
-
-                <RadioButton
-                    android:text="51-60"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_6" />
-
-                <RadioButton
-                    android:text="61-70"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_7" />
-
-                <RadioButton
-                    android:text="71-80"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_8" />
-
-                <RadioButton
-                    android:text="81-90"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_9" />
-
-                <RadioButton
-                    android:text="91-100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_10" />
-
-                    <RadioButton
-                    android:text="101+"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_high_11"
-                    android:layout_weight="1" />
-
-            </RadioGroup>
 
             </RelativeLayout>
 

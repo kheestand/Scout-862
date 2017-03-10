@@ -10,12 +10,15 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar;
+
 import static com.lightningrobotics.scout_862.FileUtils.addToArray;
 import static com.lightningrobotics.scout_862.FileUtils.appData;
 import static com.lightningrobotics.scout_862.FileUtils.matchCounter;
 import static com.lightningrobotics.scout_862.ObjectUtils.readCheckBox;
 import static com.lightningrobotics.scout_862.ObjectUtils.writeCheckBox;
 import static com.lightningrobotics.scout_862.PagerAdapter.fragmentArray;
+import static java.lang.String.valueOf;
 
 public class AutoActivity extends Fragment implements View.OnClickListener {
     // Called once the Fragment has been created in order for it to
@@ -28,8 +31,8 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
     private static LinearLayout lowGoalLayout;
     private static LinearLayout highGoalLayout;
     private static LinearLayout gearLayout;
-    private static EditText autoLowNum;
-    private static EditText autoHighNum;
+    private static HoloCircleSeekBar autoLowNum;
+    private static HoloCircleSeekBar autoHighNum;
     private static EditText autoGearNum;
 
     @Override
@@ -46,8 +49,8 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
         lowGoalLayout = (LinearLayout) autoView.findViewById(R.id.AUTOLOW_CONTENT);
         highGoalLayout = (LinearLayout) autoView.findViewById(R.id.AUTOHIGH_CONTENT);
         gearLayout = (LinearLayout) autoView.findViewById(R.id.AUTOGEAR_CONTENT);
-        autoLowNum = (EditText) autoView.findViewById(R.id.et_auto_lowScore);
-        autoHighNum = (EditText) autoView.findViewById(R.id.et_auto_highScore);
+        autoLowNum = (HoloCircleSeekBar) autoView.findViewById(R.id.picker_auto_lowGoal);
+        autoHighNum = (HoloCircleSeekBar) autoView.findViewById(R.id.picker_auto_highGoal);
         autoGearNum = (EditText) autoView.findViewById(R.id.et_auto_gearScore);
 
         autoLowBool.setOnClickListener(this);
@@ -65,9 +68,9 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
     public void writeAuto()
     {
         writeCheckBox(autoLowBool,3);
-        addToArray(4,matchCounter,autoLowNum.getText().toString());
+        addToArray(4,matchCounter,valueOf(autoLowNum.getValue()));
         writeCheckBox(autoHighBool,5);
-        addToArray(6,matchCounter,autoHighNum.getText().toString());
+        addToArray(6,matchCounter,valueOf(autoHighNum.getValue()));
         writeCheckBox(autoGearBool,9);
         addToArray(10,matchCounter,autoGearNum.getText().toString());
     }
@@ -75,9 +78,9 @@ public class AutoActivity extends Fragment implements View.OnClickListener {
     public void readAuto()
     {
         autoLowBool = readCheckBox(autoLowBool,3);
-        autoLowNum.setText(appData[4][matchCounter]);
+        autoLowNum.setValue(Float.valueOf(appData[4][matchCounter]));
         autoHighBool = readCheckBox(autoHighBool,5);
-        autoHighNum.setText(appData[6][matchCounter]);
+        autoHighNum.setValue(Float.valueOf(appData[6][matchCounter]));
         autoGearBool = readCheckBox(autoGearBool,9);
         autoGearNum.setText(appData[10][matchCounter]);
 

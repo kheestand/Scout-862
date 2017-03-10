@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.lightningrobotics.scout_862.AutoActivity">
 
-    <RelativeLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -18,178 +18,174 @@
         android:layout_marginBottom="3dp"
         android:background="@color/colorFirstCCtwo">
 
-        <CheckBox
-            android:text="Mobility Bonus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/cb_auto_mobility" />
+    </TableLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="153dp"
+        android:layout_height="200dp"
+        android:id="@+id/AUTOHIGH_CONTENT"
+        android:background="@drawable/frc_animation_high_goal"
+        android:weightSum="1"
+        android:layout_marginTop="26dp"
+        android:layout_alignTop="@+id/CONTENT_LAYOUT"
+        android:layout_alignLeft="@+id/CONTENT_LAYOUT"
+        android:layout_alignStart="@+id/CONTENT_LAYOUT">
+
+        <com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar
+            android:layout_centerInParent="true"
+            android:id="@+id/picker_auto_highGoal"
             android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="26dp"
-            android:id="@+id/AUTOLOW_CONTENT"
-            android:background="@drawable/frc_animation_low_goal"
-            android:layout_below="@+id/cb_auto_delGear"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="30dp">
+            android:layout_height="180dp"
+            android:background="#CCFFFFFF"
+            app:max="100"
+            app:pointer_color="#0174DF"
+            app:pointer_halo_color="#88252525"
+            app:pointer_size="20dp"
+            app:text_color="#000000"
+            app:text_size="65sp"
+            app:wheel_active_color="@color/colorFirstCCfour"
+            app:wheel_unactive_color="#FFCCCCCC"
+            android:layout_weight="1.15" />
 
-            <TextView
-                android:text="Enter amount:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_auto_lowScoreText"
-                android:background="#CCFFFFFF"
-                android:textSize="25sp" />
+        <TextView
+            android:text="High Goal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_auto_highScore_footer"
+            android:textSize="30sp"
+            android:background="@color/colorFirstCCfour"
+            android:textAlignment="center" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:ems="10"
-                android:id="@+id/et_auto_lowScore"
-                android:background="#AAFFFFFF"
-                android:textSize="36sp"
-                android:editable="true"
-                android:textAlignment="center"
-                android:layout_height="130dp"
-                android:inputType="number" />
+    </LinearLayout>
 
-            <TextView
-                android:text="Low Goal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_auto_lowScore_footer"
-                android:textSize="30sp"
-                android:background="@color/colorFirstCCseven"
-                android:textAlignment="center" />
+    <CheckBox
+        android:text="Deliver Gear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb_auto_delGear"
+        android:textColorLink="@color/colorFirstGrey"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="260dp" />
 
-        </LinearLayout>
+    <CheckBox
+        android:text="Score Fuel in Low Goal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb_auto_scoreLow"
+        android:textColorLink="@color/colorFirstCCseven"
+        android:layout_alignBaseline="@+id/cb_auto_delGear"
+        android:layout_alignBottom="@+id/cb_auto_delGear"
+        android:layout_toRightOf="@+id/cb_auto_delGear"
+        android:layout_toEndOf="@+id/cb_auto_delGear"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp" />
 
-        <LinearLayout
-            android:orientation="vertical"
+    <CheckBox
+        android:text="Score Fuel in High Goal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb_auto_scoreHigh"
+        android:textColorLink="@color/colorFirstCCfour"
+        android:layout_alignBaseline="@+id/cb_auto_scoreLow"
+        android:layout_alignBottom="@+id/cb_auto_scoreLow"
+        android:layout_toRightOf="@+id/cb_auto_scoreLow"
+        android:layout_toEndOf="@+id/cb_auto_scoreLow"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp" />
+
+    <CheckBox
+        android:text="Mobility Bonus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb_auto_mobility"
+        android:layout_below="@+id/cb_auto_delGear"
+        android:layout_alignLeft="@+id/CONTENT_LAYOUT"
+        android:layout_alignStart="@+id/CONTENT_LAYOUT" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="160dp"
+        android:layout_height="200dp"
+        android:id="@+id/AUTOLOW_CONTENT"
+        android:background="@drawable/frc_animation_low_goal"
+        android:weightSum="1"
+        android:layout_alignTop="@+id/AUTOHIGH_CONTENT"
+        android:layout_toRightOf="@+id/AUTOHIGH_CONTENT"
+        android:layout_toEndOf="@+id/AUTOHIGH_CONTENT">
+
+        <com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar
+            android:layout_centerInParent="true"
+            android:id="@+id/picker_auto_lowGoal"
             android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:id="@+id/AUTOHIGH_CONTENT"
-            android:background="@drawable/frc_animation_high_goal"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="30dp"
-            android:layout_marginEnd="30dp"
-            android:weightSum="1"
-            android:layout_marginTop="26dp"
-            android:layout_below="@+id/cb_auto_scoreLow">
+            android:layout_height="180dp"
+            android:background="#CCFFFFFF"
+            app:max="100"
+            app:pointer_color="#0174DF"
+            app:pointer_halo_color="#88252525"
+            app:pointer_size="20dp"
+            app:text_color="#000000"
+            app:text_size="65sp"
+            app:wheel_active_color="@color/colorFirstCCseven"
+            app:wheel_unactive_color="#FFCCCCCC"
+            android:layout_weight="1.15" />
 
-            <TextView
-                android:text="Enter amount:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_auto_highScoreText"
-                android:background="#CCFFFFFF"
-                android:textSize="25sp" />
+        <TextView
+            android:text="Low Goal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_auto_lowScore_footer"
+            android:textSize="30sp"
+            android:background="@color/colorFirstCCseven"
+            android:textAlignment="center" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:ems="10"
-                android:id="@+id/et_auto_highScore"
-                android:background="#AAFFFFFF"
-                android:textSize="36sp"
-                android:editable="true"
-                android:textAlignment="center"
-                android:layout_height="130dp"
-                android:inputType="number" />
+    </LinearLayout>
 
-            <TextView
-                android:text="High Goal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_auto_highScore_footer"
-                android:textSize="30sp"
-                android:background="@color/colorFirstCCfour"
-                android:textAlignment="center" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/AUTOGEAR_CONTENT"
+        android:background="@drawable/frc_animation_gear_del"
+        android:layout_alignTop="@+id/AUTOLOW_CONTENT"
+        android:layout_toRightOf="@+id/AUTOLOW_CONTENT"
+        android:layout_toEndOf="@+id/AUTOLOW_CONTENT">
 
-        </LinearLayout>
+        <TextView
+            android:text="Enter amount:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_auto_gearScoreText"
+            android:background="#CCFFFFFF"
+            android:textSize="25sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:ems="10"
+            android:id="@+id/et_auto_gearScore"
+            android:background="#AAFFFFFF"
+            android:textSize="36sp"
+            android:editable="true"
+            android:textAlignment="center"
+            android:inputType="number"
+            android:layout_height="100dp" />
 
         <CheckBox
-            android:text="Score Fuel in High Goal"
-            android:layout_width="wrap_content"
+            android:text="Roter Turning"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cb_auto_scoreHigh"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/cb_auto_mobility"
-            android:layout_toEndOf="@+id/cb_auto_mobility"
-            android:textColorLink="@color/colorFirstCCfour" />
+            android:id="@+id/cb_auto_roterTurning"
+            android:background="#BBFFFFFF" />
 
-        <CheckBox
-            android:text="Score Fuel in Low Goal"
-            android:layout_width="wrap_content"
+        <TextView
+            android:text="Gears Delivered"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cb_auto_scoreLow"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/cb_auto_scoreHigh"
-            android:layout_toEndOf="@+id/cb_auto_scoreHigh"
-            android:textColorLink="@color/colorFirstCCseven" />
+            android:id="@+id/tv_auto_gearScore_footer"
+            android:textSize="25sp"
+            android:background="@color/colorFirstGrey"
+            android:textAlignment="center" />
 
-        <CheckBox
-            android:text="Deliver Gear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cb_auto_delGear"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/cb_auto_scoreLow"
-            android:layout_toEndOf="@+id/cb_auto_scoreLow"
-            android:textColorLink="@color/colorFirstGrey" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:id="@+id/AUTOGEAR_CONTENT"
-            android:background="@drawable/frc_animation_gear_del"
-            android:layout_below="@+id/cb_auto_scoreHigh"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="260dp"
-            android:layout_alignParentBottom="false">
-
-            <TextView
-                android:text="Enter amount:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_auto_gearScoreText"
-                android:background="#CCFFFFFF"
-                android:textSize="25sp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:ems="10"
-                android:id="@+id/et_auto_gearScore"
-                android:background="#AAFFFFFF"
-                android:textSize="36sp"
-                android:editable="true"
-                android:textAlignment="center"
-                android:inputType="number"
-                android:layout_height="100dp" />
-
-            <CheckBox
-                android:text="Roter Turning"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/cb_auto_roterTurning"
-                android:background="#BBFFFFFF" />
-
-            <TextView
-                android:text="Gears Delivered"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_auto_gearScore_footer"
-                android:textSize="25sp"
-                android:background="@color/colorFirstGrey"
-                android:textAlignment="center" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
