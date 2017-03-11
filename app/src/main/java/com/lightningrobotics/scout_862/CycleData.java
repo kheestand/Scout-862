@@ -11,12 +11,12 @@ public class CycleData {
     public static int[][]lowCycleData;
     public static int[][]highCycleData;
     public static int cycleNum = 0;
-    public static int maxCycleNum = 0;
+    public static int maxCycleNum = 10;
 
     public static void makeCycleArrays()
     {
-        lowCycleData = new int[10][maxY];
-        highCycleData = new int [10][maxY];
+        lowCycleData = new int[maxCycleNum][maxY];
+        highCycleData = new int [maxCycleNum][maxY];
 
         for(int x = 0; x < lowCycleData.length; x++)
         {
@@ -32,6 +32,7 @@ public class CycleData {
     }
 
     public static void addToCycleArray(int dataByte, Boolean high) {
+        System.out.println("Add to cycle dataByte is " + dataByte);
         if (high == true)
             highCycleData[cycleNum][matchCounter] = dataByte;
         if (high == false)
@@ -40,17 +41,14 @@ public class CycleData {
 
     public static double getHighAverage() {
         double average = 0;
-        int cycleCount = 0;
+        int cycleCount = 1;
         int total = 0;
         for (int y = 0; y < cycleNum; y++) {
-            if (highCycleData[matchCounter][y] != 0) {
+               if (highCycleData[y][matchCounter] != 0) {
                 total = highCycleData[y][matchCounter] + total;
                 cycleCount++;
             }
         }
-
-        if (cycleCount == 0)
-            cycleCount = 1;
 
         average = (double) (total / cycleCount);
         return average;
@@ -58,7 +56,7 @@ public class CycleData {
 
     public static double getLowAverage() {
         double average = 0;
-        int cycleCount = 0;
+        int cycleCount = 1;
         int total = 0;
         for (int y = 0; y < cycleNum; y++) {
             if (lowCycleData[y][matchCounter] != 0) {
@@ -66,9 +64,6 @@ public class CycleData {
                 cycleCount++;
             }
         }
-
-        if (cycleCount == 0)
-            cycleCount = 1;
 
         average = (double) (total / cycleCount);
         return average;

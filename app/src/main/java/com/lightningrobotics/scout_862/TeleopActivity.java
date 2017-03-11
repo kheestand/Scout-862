@@ -19,6 +19,7 @@ import static com.lightningrobotics.scout_862.CycleData.getHighAverage;
 import static com.lightningrobotics.scout_862.CycleData.getLowAverage;
 import static com.lightningrobotics.scout_862.CycleData.highCycleData;
 import static com.lightningrobotics.scout_862.CycleData.lowCycleData;
+import static com.lightningrobotics.scout_862.CycleData.maxCycleNum;
 import static com.lightningrobotics.scout_862.FileUtils.addToArray;
 import static com.lightningrobotics.scout_862.FileUtils.appData;
 import static com.lightningrobotics.scout_862.FileUtils.matchCounter;
@@ -53,8 +54,6 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
         nextCycleButton = (Button) teleopView.findViewById(R.id.btn_next_cycle);
         addGearDel = (Button) teleopView.findViewById(R.id.btn_teleop_addGearsDel);
         subGearDel = (Button) teleopView.findViewById(R.id.btn_teleop_subGearsDelivered);
-
-
 
         tv_cycleNumber = (TextView) teleopView.findViewById(R.id.tv_cycle_number);
         tv_gearCount = (TextView) teleopView.findViewById(R.id.tv_teleop_gearsDel);
@@ -155,15 +154,16 @@ public class TeleopActivity extends Fragment implements View.OnClickListener {
             }
 
 
-            if ((v == nextCycleButton && cycleNum < 7) || (v == lastCycleButton && cycleNum > 1)) {
+            if ((v == nextCycleButton && cycleNum < maxCycleNum - 1) || (v == lastCycleButton && cycleNum > 1)) {
                 addToCycleArray(teleopLowNum.getValue(),false);
                 addToCycleArray(teleopHighNum.getValue(),true);
                 if (v == nextCycleButton)
                     cycleNum++;
                 if (v == lastCycleButton)
                     cycleNum--;
-
+                System.out.println("lowCycleData setValue " + lowCycleData[cycleNum][matchCounter]);
                 teleopLowNum.setValue(lowCycleData[cycleNum][matchCounter]);
+                System.out.println("highCycleData setValue " + highCycleData[cycleNum][matchCounter]);
                 teleopHighNum.setValue(highCycleData[cycleNum][matchCounter]);
                 tv_cycleNumber.setText(String.format("%01d", cycleNum));
             }
